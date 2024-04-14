@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/courses.css') }}" />
+    <!-- Ajoutez d'autres fichiers CSS ici -->
+{% endblock %}
+{% block body %}
+    {% if message is defined %}
+        <h1>{{ message }}</h1>
+    {% else %}
+    <div id="primary" class="content-area section_padding">
+        <main id="main" class="site-main">
+            <div class="container">
+                <div class="learnpress">
+                    <div id="learn-press-become-teacher-form" class="become-teacher-form learn-press-form">
+                        <form name="become-teacher-form" method="post" enctype="multipart/form-data" action="">
+                            <div class="learn-press-message success">
+                                <i class="fa" aria-hidden="true"></i>Veuiller vous connecté pour accéder aux formations!
+                            </div>
+                        </form>
+                    </div>
+                </div><br>
+                <article id="post-47" class="post-47 page type-page status-publish hentry">
+                    <div class="entry-content">
+                        <div class="learnpress">
+                            <div id="learn-press-profile" class="lp-user-profile guest">
+                                <div class="main-content-area row">
+                                    <div class="learn-press-form-login learn-press-form">
+                                        <h3>Login</h3>
+                                        <form name="learn-press-login" method="post" action="">
+                                            {{ form_start(form) }}
+                                            <ul class="form-fields">
+                                                <li class="form-field">
+                                                    <label for="username">Identifiant&nbsp;<span class="required">*</span></label>
+                                                    {{ form_widget(form.login, {'attr': {'id': 'username','type':'text','placeholder':'votre username','name':'username'}}) }}
+                                                </li>
+                                                <li class="form-field">
+                                                    <label for="password">Mot de passe&nbsp;<span class="required">*</span></label>
+
+                                                    <span class="lp-password-input">{{ form_widget(form.mdp, {'attr': {'id': 'password','type':'password','placeholder':'Password','name':'password'}}) }}</span>
+                                                </li>
+                                            </ul>
+                                            <p>
+                                                {{ form_widget(form.Connexion, {'attr': {'type': 'submit','value':'Login'}}) }}
+                                            </p>
+                                            {{ form_end(form) }}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- .entry-content -->
+                </article>
+            </div>
+        </main><!-- #main -->
+    </div>
+    {% endif %}
+{% endblock %}

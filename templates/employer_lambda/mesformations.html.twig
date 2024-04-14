@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {% if erreur is defined %}
+    <div class="modal fade" id="confirmationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Message de confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ erreur }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+            $(document).ready(function(){
+                $("#confirmationPopup").on("hidden.bs.modal", function () {
+                    window.location.href = "{{ redirection }}";
+                });
+                $("#confirmationPopup").modal();
+        });
+    </script>
+    {% else %}
+    <div class="lp-archive-courses" >
+        <ul class="learn-press-breadcrumb">
+            <li><a href="{{ path('app_home') }}" ><span>Accueil</span></a></li>
+            <li class="breadcrumb-delimiter"><i class="fas fa-chevron-right" aria-hidden="true"></i></li>
+            <li><span>Mes Formations</span></li>
+        </ul>
+        <div class="lp-content-area" >
+            <header class="learn-press-courses-header">
+
+                {% if message is defined %}
+                    <h1>{{ message }}</h1>
+                {% else %}
+                    <h1>Mes Formations</h1>
+                {% endif %}
+            </header>
+            <div class="lp-courses-bar list" >
+                <div class="switch-layout" >
+                </div>
+            </div>
+            <ul class="learn-press-courses" data-layout="list">
+                {% if inscriptions is defined %}
+                {% for inscription in inscriptions %}
+                    {% set formation = inscription.formation %}
+                    <li id="post-1026" class="post-1026 lp_course type-lp_course status-publish has-post-thumbnail hentry course_category-computer-science course">
+                        <div class="course-item" >
+                            <div class="course-wrap-thumbnail" >
+                                <div class="course-thumbnail" >
+                                    <a href="course-details.html" >
+                                        <div class="thumbnail-preview" >
+                                            <div class="thumbnail" >
+                                                <div class="centered" >
+                                                    <img width="370" height="280" src="{{ formation.image }}" class="attachment-500x300 size-500x300 wp-post-image" alt="Software Development" loading="lazy" title="Software Development">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div><!-- START .course-content -->
+                            <div class="course-content" >
+                                <div class="course-categories" >
+                                    <a href="course-category.html" rel="tag" >Computer Science</a>
+                                </div>
+                                <span class="course-instructor">
+                                    <a href="my-profile.html" ><span>Adam Smith</span></a>
+                                </span>
+                                <a href="course-details.html" class="course-permalink" >
+                                    <h3 class="course-title">{{ formation.libelle }}</h3>
+                                </a>
+                                <!-- START .course-content-meta -->
+                                <div class="course-wrap-meta" >
+                                    <div class="meta-item meta-item-duration" >{{ formation.nbreHeures }} Heures</div>
+                                    <div class="meta-item meta-item-level" >{{ formation.departement }}</div>
+                                    <div class="meta-item meta-item-lesson" >
+                                        <span class="meta-number">11 lessons</span>
+                                    </div>
+                                    <div class="meta-item meta-item-quiz" >
+                                        <span class="meta-number">bahhaah</span>
+                                    </div>
+                                    <div class="meta-item meta-item-student" >    <span class="meta-number">0 students</span>
+                                    </div>
+                                </div> <!-- END .course-content-meta -->
+                                <div class="separator" ></div>
+                                <div class="course-info" >
+                                    <div class="course-excerpt" >{{ formation.description }}</div>
+                                    <div class="clearfix" ></div>
+                                    <!-- START .course-content-footer -->
+                                    <div class="course-footer" >
+                                        <div class="course-price" >
+                                            <span class="price">Date de debut {{ formation.dateDebut|date("m/d/Y") }}</span>
+                                        </div>
+                                    </div>
+                                    <!-- END .course-content-footer -->
+                                    <div class="course-readmore" >
+                                        {% if inscription.statut == 0 %}
+                                            Refusée
+                                        {% endif %}
+                                        {% if inscription.statut == 1 %}
+                                            En attente de validation
+                                        {% endif %}
+                                        {% if inscription.statut == 2 %}
+                                            Inscrit
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

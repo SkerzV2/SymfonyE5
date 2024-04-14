@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div id="primary" class="content-area section_padding">
+        <main id="main" class="site-main">
+            <div class="container">
+                <div class="learnpress">
+                    <div id="learn-press-become-teacher-form" class="become-teacher-form learn-press-form">
+                        <form name="become-teacher-form" method="post" enctype="multipart/form-data" action="">
+                            <div class="learn-press-message success">
+                                <i class="fa" aria-hidden="true"></i>Formulaire de création d'une formation
+                            </div>
+                        </form>
+                    </div>
+                </div><br>
+                <article id="post-47" class="post-47 page type-page status-publish hentry">
+                    <div class="entry-content">
+                        <div class="learnpress">
+                            <div id="learn-press-profile" class="lp-user-profile guest">
+                                <div class="main-content-area row">
+                                    <div class="learn-press-form-login learn-press-form">
+                                        <h3>Crée la Formation</h3>
+                                        {{ form_start(form) }}
+                                        <ul class="form-fields">
+                                            <li class="form-field">
+                                                <label for="libelle">libelle &nbsp;<span class="required">*</span></label>
+                                                {{ form_widget(form.libelle, {'attr': {'id': 'libelle','type':'text','name':'libelle'}}) }}
+                                            </li>
+                                            <li class="form-field">
+                                                <label for="description">Descritpion &nbsp;<span class="required">*</span></label>
+                                                {{ form_widget(form.description, {'attr': {'id': 'description','type':'text','name':'description'}}) }}                                            </li>
+                                            <li class="form-field">
+                                                <label for="departement">Département &nbsp;<span class="required">*</span></label>
+                                                {{ form_widget(form.departement, {'attr': {'id': 'departement','type':'text','name':'departement'}}) }}
+                                            </li>
+                                            <li class="form-field">
+                                                <label for="dateDebut">Date de Début &nbsp;<span class="required">*</span></label>
+                                                {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control','type':'date'}}) }}
+                                            </li>
+                                            <li class="form-field">
+                                                <label for="nbreHeures">Nombre d'heures &nbsp;<span class="required">*</span></label>
+                                                {{ form_widget(form.nbreHeures, {'attr': {'id': 'nbreHeures','type':'number','name':'nbreHeures'}}) }}
+                                            </li>
+                                            <li class="form-field">
+                                                <label for="image">URL image &nbsp;<span class="required">*</span></label>
+                                                {{ form_widget(form.image, {'attr': {'id': 'image','type':'text','placeholder':'URL de l\'image','name':'image'}}) }}
+                                            </li>
+                                            <li class="form-field">
+                                                <label for="produit">Selectionner un produit&nbsp;<span class="required">*</span></label>
+                                                {{ form_widget(form.produit, {'attr': {'class': 'form-control'}}) }}
+                                            </li>
+                                        </ul>
+                                        {{ form_end(form) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- .entry-content -->
+                </article>
+            </div>
+        </main><!-- #main -->
+    </div>
+{% endblock %}

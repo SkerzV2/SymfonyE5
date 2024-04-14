@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {% if erreur is defined %}
+    <div class="modal fade" id="confirmationPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Message de confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ erreur }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("#confirmationPopup").on("hidden.bs.modal", function () {
+                window.location.href = "{{ redirection }}";
+            });
+            $("#confirmationPopup").modal();
+        });
+    </script>
+    {% else %}
+    <div id="learn-press-checkout" class="lp-content-wrap" >
+        {% if message is defined %}
+            <h1>{{ message }}</h1>
+        {% else %}
+            <h2>Demande d'inscription</h2>
+        {% endif %}
+        <div class="learnpress" >
+            <form method="post" id="learn-press-checkout-form" name="learn-press-checkout-form" class="lp-checkout-form" tabindex="0" enctype="multipart/form-data">
+                <div class="lp-checkout-form__before" >
+
+                </div>
+                <div class="lp-checkout-form__before" >
+                    <div id="checkout-order" class="lp-checkout-block left" >
+                        <h4>La formation</h4>
+                        <div class="lp-checkout-order__inner" >
+                            <table>
+                                <tbody>
+                                <tr class="cart-item">
+                                    {% if formation %}
+                                        <td class="course-thumbnail">
+                                            <img width="370" height="280" src="{{ formation.image }}" class="attachment-500x300 size-500x300 wp-post-image" alt="Software Development" loading="lazy" title="Software Development">
+                                        </td>
+                                        <td class="course-name">
+                                            <a href="course-details.html" >
+                                                {{ formation.libelle }}
+                                            </a>
+                                        </td>
+                                        <td class="course-total col-number">{{ formation.departement }}</td>
+                                    {% else %}
+                                        <td colspan="3">{{ message }}</td>
+                                    {% endif %}
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr class="cart-subtotal">
+                                    <th colspan="2">Produit</th>
+                                    <td class="col-number">{{ formation.produit.libelle }}</td>
+                                </tr>
+                                <tr class="order-total">
+                                    <th colspan="2">Date de debut</th>
+                                    <td class="col-number">{{ formation.dateDebut|date("m/d/Y") }}</td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="checkout-payment" class="lp-checkout-block left" >
+
+                    <ul class="payment-methods">
+                        <li id="learn-press-payment-method-paypal" class="lp-payment-method lp-payment-method-paypal selected">
+
+                        </li>
+                    </ul>
+                    {{ form_start(form) }}
+                    <div class="event_list_btn aos-init aos-animate" data-aos="fade-up" data-aos-anchor-placement="top-center">
+                        <a href="events.html" class="btn_3">Anuler
+                        </a>
+                        {{ form_widget(form.formationId, {'attr': {'class':'hidden', 'value': formation.id}}) }}
+                        {{ form_widget(form.Valider, {'attr': {'type': 'submit','class':'btn_1'}}) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche d'inscription{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.rechercher) }}
+    {{ form_end(form) }}
+
+    {% if employesInscription is not empty %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Nombre d'heures</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for inscription in employesInscription %}
+                <tr>
+                    <td>{{ inscription.formation.produit.libelle }}</td>
+                    <td>{{ inscription.formation.nbreheures }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun employé trouvé.</p>
+    {% endif %}
+{% endblock %}

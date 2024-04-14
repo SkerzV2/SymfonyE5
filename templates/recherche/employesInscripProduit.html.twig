@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des inscriptions par produit{% endblock %}
+
+{% block body %}
+
+            {{ form_start(form) }}
+                {{ form_widget(form.produit, {'attr': {'class': 'form-control'}}) }}
+            {{ form_end(form) }}
+
+
+    <h1>Liste des inscriptions par produit</h1>
+
+    {% if employesInscription is not empty %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <!-- Ajoutez d'autres colonnes si nécessaire -->
+            </tr>
+            </thead>
+            <tbody>
+            {% for inscription in employesInscription %}
+                <tr>
+                    <td>{{ inscription.employe.nom }}</td>
+                    <td>{{ inscription.employe.prenom }}</td>
+                    <!-- Ajoutez d'autres colonnes si nécessaire -->
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucune inscription trouvée pour le produit sélectionné.</p>
+    {% endif %}
+{% endblock %}

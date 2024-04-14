@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Inclusion des fichiers CSS avec la syntaxe Twig -->
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/courses.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/aos.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/animate.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/flaticon.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/elegent_icon.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/FontAwesome.css') }}" />
+        <script src="{{ asset('js/courses.js')}}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/45e38e596f.js" crossorigin="anonymous"></script>
+        <!-- Ajoutez d'autres fichiers CSS ici -->
+    {% endblock %}
+</head>
+<body>
+{% block header %}
+    <header class="header_part">
+    <div class="main_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header_iner d-flex justify-content-between align-items-center">
+                        <div class="logo">
+                            <a href="index.html"><img src="{{ asset('img/lr.png') }}" style="width: 50%; height: auto;"/></a>
+                        </div>
+
+                        <nav class="navbar_bar">
+                            <ul>
+                                <li><a href="/home">Accueil</a></li>
+                                    {% if app.session.get('statut') is not null and app.session.get('statut') == 1 %}
+                                        <li><a href="{{ path('app_employerserviceformation_gestionformation') }}">Gestion des formations</a></li>
+                                        <li><a href="{{ path('app_employerserviceformation_gestioninscriptionformation') }}">Gestion des inscriptions</a></li>
+                                    {% elseif app.session.get('statut') is not null and app.session.get('statut') == 0 %}
+                                        <li><a href="{{ path('app_employerlambda_index') }}">Formations</a></li>
+                                        <li><a href="{{ path('app_employerlambda_mesformations') }}">mesFormations</a></li>
+                                    {% else %}
+                                        <li><a href="{{ path('app_login') }}">Formation</a></li>
+                                    {% endif %}
+                            </ul>
+                        </nav>
+                        <div class="navbar_btn">
+                            {% if app.session.get('statut') is not null and app.session.get('statut') == 1 %}
+                                <a href="{{ path('app_logout') }}" class="btn_1">Déconnexion</a>
+                            {% elseif app.session.get('statut') is not null and app.session.get('statut') == 0 %}
+                                <a href="{{ path('app_logout') }}" class="btn_1">Déconnexion</a>
+                            {% else %}
+                                <a href="{{ path('app_login') }}" class="btn_1">Connexion</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+{% endblock %}
+
+{% block body %}{% endblock %}
+</body>
+</html>
